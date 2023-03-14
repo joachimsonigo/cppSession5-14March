@@ -1,11 +1,16 @@
 #include <iostream>
 #include "vehicle.h"
 #include "Car.h"
-
+#include "bike.h"
 using namespace std;
+
+void information(vehicle *v){
+    v->disp();
+}
 int main() {
-    vehicle v,v1(20);
-    car c,c1(20,5);
-    c1.disp();
+    bike b(2000,325);
+    car c(10000,3);
+    information(&b);
+    information(&c);
     return 0;
 }

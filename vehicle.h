@@ -13,13 +13,13 @@ protected:
 public:
     vehicle();
     vehicle(double);
-    void display();
+    virtual void disp();
     double get_price();
 };
 
 vehicle::vehicle() {m_price=0.0;}
 vehicle::vehicle(double a) {m_price=a;}
-void vehicle::display() {cout<<"Price of the vehicle "<<m_price<< " in euros."<<endl;}
+void vehicle::disp() {cout<<"Price of the vehicle is of "<<m_price<< " euros."<<endl;}
 double vehicle::get_price() {return m_price;}
 
 #endif //SESSION5CPP_VEHICLE_H
