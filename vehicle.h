@@ -7,14 +7,16 @@
 #include <iostream>
 using namespace std;
 
-class vehicle {
+class vehicle { //abstract
 protected:
     double m_price;
 public:
     vehicle();
     vehicle(double);
-    virtual void disp();
-    double get_price();
+    virtual void disp()=0; //pure virtual
+    virtual double get_price()=0;
+    virtual int get_type()=0;
+    virtual ~vehicle(){cout<<"deleted vehicle"<<endl;};
 };
 
 vehicle::vehicle() {m_price=0.0;}
