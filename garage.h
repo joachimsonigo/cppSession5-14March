@@ -21,10 +21,13 @@ public:
     void pop();
     void count();
     void totprice();
+    void showall();
     virtual void disp();
     virtual ~garage(){cout<<"deleted garage"<<endl;};
 };
-
+void line(){
+    cout<<"----------------"<<endl;
+}
 void garage::add() {
     int type;
     cout<<"What vehicle type are you trying to add?(1 for car 2 for bike)"<<endl;
@@ -80,4 +83,33 @@ void garage::totprice() {
     }
     cout<<"Total value of garage "<<totprb+totprc<<".\nTotal price of bikes : "<<totprb<<" \nTotal price of cars : "<<totprc<<endl;
 }
+void garage::showall() {
+    int tpc=0,tpb=0,nc=0,nb=0;
+    for (int i = 0; i < size(m_vehicle); ++i) {
+        for (int i = 0; i < size(m_vehicle); ++i) {
+            if (m_vehicle[i]->get_type() == 1){
+                tpc+=m_vehicle[i]->get_price();
+            }else
+                tpb+=m_vehicle[i]->get_price();
+        }
+        for (int i = 0; i < size(m_vehicle); ++i) {
+            if (m_vehicle[i]->get_type()==1)
+                nc++;
+            else
+                nb++;
+        }
+    }
+    line();
+    cout<<"You have"<<nc+nb<<" vehicles"<<endl;
+    line();
+    for (int i = 0; i < size(m_vehicle); ++i) {
+        m_vehicle[i]->disp();
+    }
+    line();
+    cout<<"nb of bikes : "<<nb<< " with a tot price of "<<tpb<<endl;
+    cout<<"nb of cars : "<<nc<<" with a tot price of "<<tpc<<endl;
+    line();
+cout<<"tot number of vehicles : "<<nb+nc<<" with a tot price of "<<tpb+tpc<<endl;
+}
+
 #endif //SESSION5CPP_GARAGE_H
