@@ -6,6 +6,9 @@
 #define SESSION5CPP_GARAGE_H
 #include <vector>
 #include <ostream>
+#include <fstream>
+#include <sstream>
+#include <string>
 #include "vehicle.h"
 #include "Car.h"
 #include "bike.h"
@@ -22,6 +25,8 @@ public:
     void count();
     void totprice();
     void showall();
+    void write();
+    void read();
     virtual void disp();
     virtual ~garage(){};
     friend ostream& operator <<(ostream&,const garage&);
@@ -117,12 +122,63 @@ cout<<"tot number of vehicles : "<<nb+nc<<" with a tot price of "<<tpb+tpc<<endl
 ostream& operator <<(ostream&os,const garage&g){
     for (int i = 0; i < size(g.m_vehicle); ++i) {
         if (g.m_vehicle[i]->get_type() == 1){
-            os << g.m_vehicle[i]->get_type() << "," << g.m_vehicle[i]->get_price()<<endl;
+            os << g.m_vehicle[i]->get_type() << "," << g.m_vehicle[i]->get_price()<<g.m_vehicle[i]->get_doors()<<endl;
             return (os);}
         else
         {os <<g.m_vehicle[i]->get_type() << "," << g.m_vehicle[i]->get_price()<<","<<g.m_vehicle[i]->get_speed()<<endl;
             return (os);}
     }
 }
+void garage::write() {
+    ofstream outfile("garage.csv");
+    if (!outfile) {
+        cerr << "Error opening output file" << endl;
+        return;
+    }
+    outfile << "Vehicle Type, Attribute, Price" << endl;
+    for (int i = 0; i < m_vehicle.size(); i++) {
+        if (m_vehicle[i]->get_type() == 1) {
+            outfile << "Car," << m_vehicle[i]->get_doors() << ",";
+        } else if (m_vehicle[i]->get_type() == 2) {
+            outfile << "Bike," << m_vehicle[i]->get_speed() << ",";
+        }
+        outfile << m_vehicle[i]->get_price() << endl;
+    }
+    outfile.close();
+    cout << "Garage data written to garage.csv" << endl;
+}
 
+void garage::read() {
+    ifstream infile("garage.csv");
+    if (!infile) {
+        cerr << "Error opening input file" << endl;
+        return;
+    }
+
+    string line, type, attribute;
+    int price, doors, speed;
+
+    // Skip the header row
+    getline(infile, line);
+
+    while (getline(infile, line)) {
+        istringstream iss(line);
+        getline(iss, type, ',');
+        getline(iss, attribute, ',');
+        iss >> price;
+
+        if (type == "Car") {
+            doors = stoi(attribute);
+            m_vehicle.push_back(new car(price, doors));
+        } else if (type == "Bike") {
+            speed = stoi(attribute);
+            m_vehicle.push_back(new bike(price, speed));
+        } else {
+            cerr << "Invalid vehicle type: " << type << endl;
+        }
+    }
+
+    infile.close();
+    cout << "Garage data loaded from garage.csv" << endl;
+}
 #endif //SESSION5CPP_GARAGE_H

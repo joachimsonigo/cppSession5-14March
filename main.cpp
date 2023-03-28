@@ -13,9 +13,8 @@ void information(vehicle *v){
 
 void menu(){
     int choice;
-    ofstream MyFile("filename.txt");
-    MyFile.open ("filename.txt", ios::out | ios::in );
     garage g;
+    g.read();
     do {
         do {
             cout<<"-----------------\n\tMenu\n-----------------"<<endl;
@@ -25,7 +24,7 @@ void menu(){
         }while(choice<1 || choice > 4);
         if (choice ==1){
             g.add();
-            MyFile<<g;
+            g.write();
         }
         else
         if (choice == 2){
@@ -37,12 +36,11 @@ void menu(){
             g.disp();
             system("pause");
             g.pop();
-            MyFile<<g;
+            g.write();
         }
     }while(choice != 4);
     system("color 04");
     cout<<"Goodbye, thank you for using this program."<<endl;
-    MyFile.close();
 }
 
 int main() {
