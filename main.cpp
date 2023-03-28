@@ -41,7 +41,7 @@ void menu(){
         }
     }while(choice != 4);
     system("color 04");
-    cout<<"goodbye"<<endl;
+    cout<<"Goodbye, thank you for using this program."<<endl;
     MyFile.close();
 }
 
