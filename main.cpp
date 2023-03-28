@@ -14,6 +14,7 @@ void information(vehicle *v){
 void menu(){
     int choice;
     ofstream MyFile("filename.txt");
+    MyFile.open ("filename.txt", ios::out | ios::in );
     garage g;
     do {
         do {
@@ -36,6 +37,7 @@ void menu(){
             g.disp();
             system("pause");
             g.pop();
+            MyFile<<g;
         }
     }while(choice != 4);
     system("color 04");

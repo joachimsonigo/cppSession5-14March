@@ -16,6 +16,8 @@ public:
     virtual void disp()=0; //pure virtual
     virtual double get_price()=0;
     virtual int get_type()=0;
+    virtual int get_speed();
+    virtual int get_doors();
     virtual ~vehicle(){cout<<"deleted vehicle"<<endl;};
 };
 
@@ -23,5 +25,7 @@ vehicle::vehicle() {m_price=0.0;}
 vehicle::vehicle(double a) {m_price=a;}
 void vehicle::disp() {cout<<"Price of the vehicle is of "<<m_price<< " euros."<<endl;}
 double vehicle::get_price() {return m_price;}
+int vehicle::get_speed() {return get_speed();}
+int vehicle::get_doors() {return get_doors();}
 
 #endif //SESSION5CPP_VEHICLE_H

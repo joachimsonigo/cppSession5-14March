@@ -17,6 +17,7 @@ public:
     virtual void disp();
     virtual double get_price();
     virtual int get_type();
+    virtual int get_doors();
     virtual ~car(){cout<<"car is ded"<<endl;};
 
 };
@@ -26,4 +27,5 @@ car::car(double a, int n): vehicle(a),m_doors(n){}
 double car::get_price() {vehicle::get_price();}
 int car::get_type() {return 1;}
 void car::disp() {cout<<"This vehicle has "<<m_doors<<" doors is of type "<<get_type()<<" (car)."<<endl;vehicle::disp();}
+int car::get_doors() {return m_doors;}
 #endif //SESSION5CPP_CAR_H

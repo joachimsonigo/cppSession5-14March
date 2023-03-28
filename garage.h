@@ -116,7 +116,13 @@ cout<<"tot number of vehicles : "<<nb+nc<<" with a tot price of "<<tpb+tpc<<endl
 
 ostream& operator <<(ostream&os,const garage&g){
     for (int i = 0; i < size(g.m_vehicle); ++i) {
-        os<<"Vehicle"<<g.m_vehicle[i]<<endl;return(os);}
+        if (g.m_vehicle[i]->get_type() == 1){
+            os << g.m_vehicle[i]->get_type() << "," << g.m_vehicle[i]->get_price()<<endl;
+            return (os);}
+        else
+        {os <<g.m_vehicle[i]->get_type() << "," << g.m_vehicle[i]->get_price()<<","<<g.m_vehicle[i]->get_speed()<<endl;
+            return (os);}
+    }
 }
 
 #endif //SESSION5CPP_GARAGE_H
