@@ -1,9 +1,11 @@
 #include <iostream>
+#include <fstream>
 #include "vehicle.h"
 #include "Car.h"
 #include "bike.h"
 #include "garage.h"
 using namespace std;
+
 
 void information(vehicle *v){
     v->disp();
@@ -11,41 +13,34 @@ void information(vehicle *v){
 
 void menu(){
     int choice;
+    ofstream MyFile("filename.txt");
     garage g;
     do {
         do {
             cout<<"-----------------\n\tMenu\n-----------------"<<endl;
-            cout<<"1-Add vehicle\n2-Delete a vehicule\n3-Display garage\n4-Count rides\n5-Compute prices\n6-Show everything\n7-Exit"<<endl;
+            cout<<"1-Add\n2-Show\n3-Delete\n4-Exit"<<endl;
             cout<<"--------------"<<endl;
             cin>>choice;
-        }while(choice<1 || choice > 7);
+        }while(choice<1 || choice > 4);
         if (choice ==1){
             g.add();
+            MyFile<<g;
         }
         else
         if (choice == 2){
-            g.pop();
+            g.showall();
+            system("pause");
         }
         else
         if (choice == 3){
             g.disp();
             system("pause");
+            g.pop();
         }
-        else
-        if(choice == 4 ){
-            g.count();
-            system("pause");
-        }
-        else if (choice==5)
-        {g.totprice();system("pause");}
-        else if(choice==6){
-            g.showall();
-            system("pause");
-        }
-
-    }while(choice != 7);
+    }while(choice != 4);
     system("color 04");
     cout<<"goodbye"<<endl;
+    MyFile.close();
 }
 
 int main() {

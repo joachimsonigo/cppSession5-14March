@@ -23,7 +23,8 @@ public:
     void totprice();
     void showall();
     virtual void disp();
-    virtual ~garage(){cout<<"deleted garage"<<endl;};
+    virtual ~garage(){};
+    friend ostream& operator <<(ostream&,const garage&);
 };
 void line(){
     cout<<"----------------"<<endl;
@@ -110,6 +111,12 @@ void garage::showall() {
     cout<<"nb of cars : "<<nc<<" with a tot price of "<<tpc<<endl;
     line();
 cout<<"tot number of vehicles : "<<nb+nc<<" with a tot price of "<<tpb+tpc<<endl;
+
+}
+
+ostream& operator <<(ostream&os,const garage&g){
+    for (int i = 0; i < size(g.m_vehicle); ++i) {
+        os<<"Vehicle"<<g.m_vehicle[i]<<endl;return(os);}
 }
 
 #endif //SESSION5CPP_GARAGE_H
